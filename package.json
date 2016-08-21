@@ -1,0 +1,11 @@
+{
+  "name": "goquoteme",
+  "version": "0.0.1",
+  "description": "auction web app for goquoteme.co.uk",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Spyros Psychogios",
+  "license": "ISC"
+}
