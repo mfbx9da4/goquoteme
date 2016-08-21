@@ -1,0 +1,12 @@
+/* CSS declarations go here */
+@import "./home.less";
+
+
+body, html, button {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 500;
+}
+body {
+  margin: 0;
+  /*background-color: yellow;*/
+}
