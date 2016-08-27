@@ -1,7 +1,5 @@
 import React, {PropTypes} from 'react';
-import ReactDOM from 'react-dom';
-
-// import {Jobs} from '../api/jobs';
+import CreateJob from '../components/CreateJob.jsx';
 import Job from '../components/Job.jsx';
 
 const Home = React.createClass({
@@ -35,21 +33,7 @@ const Home = React.createClass({
           <h1><b>Go</b>QuoteMe</h1>
         </div>
         <div className="container">
-          <div className="job-create">
-            <h2>Create a job:</h2>
-            <form className="new-job"
-              onSubmit={this.handleCreateJob}>
-              <input type="text" ref={(jt) => this._jobTitle = jt}
-                placeholder="Name your job"
-                onChange={this.handleTitleChange} />
-              <textarea type="text" ref={(jd) => this._jobDesc = jd}
-                className="desc"placeholder="Describe your job" rows="8" />
-              <button type="submit" value="Submit"
-                className={'submit ' + (submitActive ? 'active' : 'disabled')}>
-                Submit
-              </button>
-            </form>
-          </div>
+          <CreateJob />
           {this.renderJobs()}
         </div>
       </div>

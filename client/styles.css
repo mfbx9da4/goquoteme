@@ -1,0 +1,122 @@
+/* CSS declarations go here */
+body .container {
+  margin-left: 20px;
+  margin-top: 140px;
+}
+body .header {
+  top: 0;
+  width: 100vw;
+  background-color: #17808F;
+  padding-left: 20px;
+  position: fixed;
+}
+body .header #login-buttons {
+  position: absolute;
+  left: 20px;
+  top: 80px;
+  font-size: 18px;
+}
+body .header #login-buttons .login-button {
+  background-color: #17808F;
+}
+body .header h1 {
+  font-size: 2.5em;
+  font-weight: 500;
+}
+body .header h1 b {
+  font-weight: 800;
+}
+body .job-create {
+  padding: 12px;
+  margin: 0 auto;
+  width: 60%;
+  box-shadow: 0px 0px 21px 1px rgba(23, 128, 143, 0.75);
+  padding-bottom: 50px;
+}
+body .job-create h2 {
+  margin: 10px 0;
+  text-align: center;
+  font-size: 2em;
+}
+body .job-create input,
+body .job-create .desc {
+  display: block;
+  border: 1px solid rgba(23, 74, 94, 0.6);
+  padding: 5px;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+body .job-create input:focus,
+body .job-create .desc:focus {
+  outline-color: #174a5e;
+}
+body .job-create .desc {
+  font-size: 1em;
+  width: 70%;
+  resize: vertical;
+  margin: 20px auto;
+}
+body .job-create input {
+  font-size: 1.2em;
+}
+body .job-create .submit {
+  outline: none;
+  width: 120px;
+  height: 30px;
+  border: 1px solid #17808F;
+  border-radius: 4px;
+  background: white;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.5s ease-out;
+}
+body .job-create .submit.disabled {
+  color: grey;
+  cursor: not-allowed;
+}
+body .job-create .submit.active {
+  background-color: #17808F;
+  color: white;
+  cursor: pointer;
+}
+body .jobs-container {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+body .jobs-container .job {
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 0px 0px 2px 1px rgba(23, 128, 143, 0.75);
+}
+body .jobs-container .job .new-bid .bid-price {
+  display: block;
+  font-size: 1.8em;
+}
+body .jobs-container .job .new-bid .bid-price input {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  width: 160px;
+  height: 40px;
+}
+body .jobs-container .job .new-bid textarea {
+  border: 1px solid rgba(23, 74, 94, 0.6);
+  width: 90%;
+  font-size: 1.2em;
+}
+body .jobs-container .job .delete-job {
+  float: right;
+  padding: 10px;
+  cursor: pointer;
+}
+body,
+html,
+button {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 500;
+}
+body {
+  margin: 0;
+}
