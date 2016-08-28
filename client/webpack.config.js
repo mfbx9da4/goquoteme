@@ -1,4 +1,3 @@
-const path = require('path');
 const webpack = require('webpack');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -13,8 +12,11 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[name].js',
   },
+  resolve: {
+    // We can now require('file') instead of require('file.jsx')
+    extensions: ['', '.js', '.jsx', '.scss'],
+  },
   module: {
-    devtool: 'eval-source-map',
     loaders: [
       {
         test: /.jsx?$/,
@@ -22,6 +24,8 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: ['es2015', 'react'],
+          retainLines: true,
+          cacheDirectory: true,
         },
       },
       {
@@ -43,8 +47,30 @@ module.exports = {
       // },
     ],
   },
+  devtool: 'source-map',
   plugins: [
     new LiveReloadPlugin(),
     new ExtractTextPlugin('./[name].css'),
+    // new webpack.SourceMapDevToolPlugin({
+    //   // Match assets just like for loaders.
+    //   test: /\.js$/,
+    //
+    //   // `exclude` matches file names, not package names!
+    //   exclude: '/node_modules/',
+    //
+    //   // If filename is set, output to this file.
+    //   // See `sourceMapFileName`.
+    //   filename: '[file].map',
+    //
+    //   // This line is appended to the original asset processed. For
+    //   // instance '[url]' would get replaced with an url to the
+    //   // sourcemap.
+    //   append: false,
+    //
+    //   module: true, // If false, separate sourcemaps aren't generated.
+    //
+    //   // Use simpler line to line mappings for the matched modules.
+    //   // lineToLine: bool | {test, include, exclude}
+    // }),
   ],
 };

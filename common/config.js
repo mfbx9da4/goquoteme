@@ -1,67 +1,43 @@
-module.exports.getConfig = function() {
-  const ENV = process.env;
-  const config = {
-    development: {
-      members: [
-        {
-          USER: '',
-          PASS: '',
-          HOST: ENV.MONGO_HOST || 'localhost',
-          PORT: ENV.MONGO_PORT || '27017',
-          DATABASE: ENV.MONGO_NAME || 'goquoteme',
-        },
-      ],
-      token: {
-        secret: ENV.TOKEN_SECRET || 'Ud9L3pPLxkQJeMCqEePfMaJa3BUELHpNmVLqdd36',
-      },
-    },
-  };
-  if (!config[ENV.ENV]) { throw new Error('Incorrect env'); }
-  return config[ENV.ENV];
-};
+"use strict"; //eslint-disable-line
+const ENV = process.env.ENV || 'dev';
 
-function createPathString(dbConfig, prependMongo, appendDbName) {
-  const dbPath = [];
-  if (prependMongo) {
-    dbPath.push('mongodb://');
-  }
-  if (dbConfig.USER && prependMongo) {
-    dbPath.push(dbConfig.USER);
-    dbPath.push(':');
-    dbPath.push(dbConfig.PASS);
-    dbPath.push('@');
-  }
-  dbPath.push(dbConfig.HOST);
-  dbPath.push(':');
-  dbPath.push(dbConfig.PORT);
-  if (appendDbName) {
-    dbPath.push('/');
-    dbPath.push(dbConfig.DATABASE);
-  }
-  return dbPath.join('');
+const LOCALHOST = process.env.LOCALHOST_IP || '0.0.0.0';
+
+const config = {};
+
+// env     = full name of the environment
+// host    = where the server is served
+// apphost = where client is served
+// api     = where the api is served
+// minify  = where to minify everything and create single bundle (or keep two separate, non-minified bundles)
+// www     = cordova web folder
+
+switch (ENV) {
+
+  case 't':
+  case 'test':
+    config.env = 'test';
+    config.host = 'http://' + LOCALHOST + ':3001/';
+    config.apphost = 'http://' + LOCALHOST + ':8080/';
+    config.minify = false;
+    break;
+
+  case 'd':
+  case 'dev':
+  case 'development':
+    config.env = 'development';
+    config.host = 'http://' + LOCALHOST + ':3000/';
+    config.apphost = 'http://' + LOCALHOST + ':8080/';
+    config.minify = false;
+    config.debugAnalytics = false; // <- verbose, only in dev
+    config.showDiffsInLogs = false; // <- slow, only in dev
+    break;
+
+  default:
+    throw Error('Invalid environment (ENV): ' + ENV);
+
 }
 
-module.exports.getConnectOptions = function() {
-  const dbConfig = module.exports.getConfig();
-  const connectStrings = (dbConfig.members || []).map((member, i, array) => {
-    return createPathString(member, i === 0, i === array.length - 1);
-  });
-  const result = {
-    connectString: connectStrings.join(','),
-    options: {},
-  };
-  if (dbConfig.ssl) {
-    const ca = [(new Buffer(process.env.MONGO_CERT, 'base64')).toString()];
-    result.options.mongos = {
-      ssl: true,
-      sslValidate: true,
-      sslCA: ca,
-      ca: ca, // eslint-disable-line
-      socketOptions: {
-        connectTimeoutMS: 300000,
-        socketTimeoutMS: 300000,
-      },
-    };
-  }
-  return result;
-};
+config.api = config.host + 'api';
+
+export default config;

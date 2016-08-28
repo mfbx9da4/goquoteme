@@ -1,6 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import path from 'path';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -10,7 +9,7 @@ import cors from 'cors';
 const LocalStrategy = require('passport-local').Strategy;
 
 import User from './models/user';
-import {getConnectOptions} from '../common/config'; //eslint-disable-line
+import {getConnectOptions} from './config'; //eslint-disable-line
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
